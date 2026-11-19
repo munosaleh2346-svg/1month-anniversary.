@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hambalyo Sanad-guurada Bisha 1-aad, Salma ❤️</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti for Heart Bursts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            roseSoft: '#fff0f5',
+            rosePetal: '#ffe4ec',
+            roseBlush: '#ffccd9',
+            rosePrimary: '#e11d48',
+            roseDeep: '#9f1239',
+          },
+          animation: {
+            'float-slow': 'floatSlow 6s ease-in-out infinite',
+            'pulse-soft': 'pulseSoft 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'fade-up': 'fadeUp 0.8s ease-out forwards',
+          },
+          keyframes: {
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            pulseSoft: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.06)' },
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #fff5f8 0%, #ffffff 50%, #ffe8f0 100%);
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Floating Background Hearts */
+    .floating-heart {
+      position: fixed;
+      bottom: -10vh;
+      pointer-events: none;
+      z-index: 0;
+      animation: riseUp linear forwards;
+      opacity: 0.55;
+    }
+
+    @keyframes riseUp {
+      0% {
+        transform: translateY(0) scale(0.8) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.65;
+      }
+      85% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-115vh) scale(1.25) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 192, 203, 0.45);
+      box-shadow: 0 20px 45px -15px rgba(225, 29, 72, 0.12);
+    }
+
+    /* Interactive 3D Flip Card for Reasons I Love You */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Envelope Flap Animation */
+    .envelope-flap {
+      transform-origin: top;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .envelope-open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+  </style>
+</head>
+<body class="font-sans text-slate-800 min-h-screen relative selection:bg-pink-200 selection:text-rose-900">
+
+  <!-- Container for Floating Background Hearts -->
+  <div id="hearts-container" aria-hidden="true"></div>
+
+  <!-- =========================================================
+       INTRO SCREEN: INTERACTIVE LOVE ENVELOPE (SOMALI)
+       ========================================================= -->
+  <section id="intro-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-pink-50 via-white to-rose-100 transition-all duration-700">
+    <div class="max-w-md w-full text-center space-y-6 animate-fade-up">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-100/80 border border-pink-200 text-rose-700 text-xs font-semibold tracking-wider uppercase shadow-sm">
+        <span>✨ Hadiyad Gaar Ah ✨</span>
+      </div>
+
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-rose-950 leading-tight">
+        Fariin Gaar Ah oo Ku Socota Salma Feysal Ahmed Hassan
+      </h1>
+      <p class="text-slate-600 text-sm sm:text-base">
+        Qayb yar oo ka mid ah qalbigayga oo aan adiga kuu diyaariyey maalinta bisha koowaad ee jacaylkeenna.
+      </p>
+
+      <!-- Interactive Envelope Visual -->
+      <div id="envelope-wrapper" onclick="openEnvelope()" class="relative mx-auto w-72 sm:w-80 h-48 sm:h-52 cursor-pointer group select-none my-4 animate-float-slow">
+        <!-- Envelope Back -->
+        <div class="absolute inset-0 bg-gradient-to-b from-pink-200 to-rose-200 rounded-2xl shadow-xl border border-pink-300"></div>
+
+        <!-- Letter Peeking Inside -->
+        <div id="letter-peek" class="absolute inset-x-4 top-3 bottom-3 bg-white rounded-xl shadow-inner flex flex-col items-center justify-center p-4 transition-transform duration-700">
+          <p class="font-serif italic text-rose-600 text-sm">Gacaliso Salma...</p>
+          <p class="text-xs text-slate-400 mt-1">Ka timid Saleh Sadiq Mohamud</p>
+        </div>
+
+        <!-- Envelope Bottom & Side Folds (SVG) -->
+        <svg class="absolute inset-0 w-full h-full rounded-2xl pointer-events-none z-10" viewBox="0 0 320 208" preserveAspectRatio="none">
+          <polygon points="0,208 160,104 320,208" fill="#ffe4ec" />
+          <polygon points="0,0 160,112 0,208" fill="#ffd1df" opacity="0.85" />
+          <polygon points="320,0 160,112 320,208" fill="#ffd1df" opacity="0.85" />
+        </svg>
+
+        <!-- Envelope Top Flap -->
+        <svg class="envelope-flap absolute inset-x-0 top-0 w-full h-32 rounded-t-2xl pointer-events-none z-20 drop-shadow-md" viewBox="0 0 320 128" preserveAspectRatio="none">
+          <polygon points="0,0 320,0 160,122" fill="#fda4af" />
+        </svg>
+
+        <!-- Wax Heart Seal -->
+        <div id="wax-seal" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-16 h-16 rounded-full bg-gradient-to-tr from-rose-600 to-pink-500 shadow-lg border-4 border-pink-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-pulse-soft">
+          <span class="text-white text-2xl drop-shadow">❤️</span>
+        </div>
+      </div>
+
+      <button onclick="openEnvelope()" class="mt-4 inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-semibold shadow-lg shadow-pink-300/60 active:scale-95 transition-all cursor-pointer">
+        <span>Halkan Taabo Si Aad U Furto</span>
+        <span>💌</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       MAIN ANNIVERSARY CONTENT (SOMALI)
+       ========================================================= -->
+  <main id="main-content" class="hidden relative z-10 max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-12">
+
+    <!-- Header Hero Card -->
+    <header class="glass-card rounded-3xl p-7 sm:p-12 text-center relative overflow-hidden animate-fade-up">
+      <!-- Decorative Corner Blurs -->
+      <div class="absolute -top-12 -left-12 w-36 h-36 bg-pink-200/50 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-12 -right-12 w-40 h-40 bg-rose-200/50 rounded-full blur-2xl pointer-events-none"></div>
+
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 border border-pink-200 text-rose-600 text-xs sm:text-sm font-semibold mb-5">
+        <span>🌸 30 Maalmood oo Farxad & Jacayl Ah 🌸</span>
+      </div>
+
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold text-rose-950 tracking-tight leading-tight">
+        Hambalyo Sanad-guurada 1-aad ee Bisha Koowaad
+      </h1>
+
+      <h2 class="font-serif italic text-xl sm:text-3xl text-rose-600 mt-3 font-medium">
+        Salma Feysal Ahmed Hassan
+      </h2>
+
+      <div class="my-6 flex items-center justify-center gap-3 text-pink-400">
+        <span class="h-px w-12 sm:w-20 bg-pink-200"></span>
+        <span class="text-xl">💖</span>
+        <span class="h-px w-12 sm:w-20 bg-pink-200"></span>
+      </div>
+
+      <p class="text-slate-600 text-sm sm:text-lg max-w-xl mx-auto leading-relaxed">
+        Hal bil oo buuxda oo aan ku jeclaa, kuu bogayey, kuna mahadinayey Alle subxaanahu watacaalaa maalin kasta oo nolosheyda aad ku soo biirtay.
+      </p>
+
+      <!-- Live Milestone Counters -->
+      <div class="grid grid-cols-3 gap-3 sm:gap-5 max-w-lg mx-auto mt-8">
+        <div class="bg-white/90 rounded-2xl p-3 sm:p-4 border border-pink-100 shadow-sm">
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-rose-600">1</div>
+          <div class="text-[11px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Bil oo Macaan</div>
+        </div>
+        <div class="bg-white/90 rounded-2xl p-3 sm:p-4 border border-pink-100 shadow-sm">
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-rose-600">720+</div>
+          <div class="text-[11px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Saacadood oo Jacayl Ah</div>
+        </div>
+        <div class="bg-white/90 rounded-2xl p-3 sm:p-4 border border-pink-100 shadow-sm">
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-rose-600">∞</div>
+          <div class="text-[11px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Weligaa & Abidkii</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================================
+         DEEP LOVE LETTER SECTION (SOMALI)
+         ========================================================= -->
+    <section class="glass-card rounded-3xl p-7 sm:p-11 relative">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-11 h-11 rounded-2xl bg-pink-100 text-rose-600 flex items-center justify-center text-xl shadow-inner">
+          ✍️
+        </div>
+        <div>
+          <h3 class="font-serif text-2xl font-bold text-rose-950">Inta Aan Ku Jeclahay</h3>
+          <p class="text-xs text-rose-500 font-medium">Fariin ka soo go'day qalbiga Saleh</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-slate-700 text-base sm:text-lg leading-relaxed font-normal">
+        <p class="font-serif italic text-xl text-rose-800">
+          Gacalisadayda qaaliga ah, Salma,
+        </p>
+        <p>
+          Inta aan ku jeclahay ma jiro wax lagu cabbiri karo. Inkasta oo ay tahay hal bil oo keliya, haddana waxaad noqotay fikirka ugu horreeya ee aan ku soo tooso subaxdii, xasilloonida aan dareemo maalintii, iyo ducada ugu macaan ee qalbigayga ku jirta habeen kasta.
+        </p>
+        <p>
+          Erayo keligood ma soo koobi karaan sida qotoda dheer ee aan kuu jeclahay. Waxaad nolosheyda ku soo kordhisay diirranaan, naxariis, iyo nuur aanan weligay horay u arag. Sheeko kasta oo aan wadaagno way i farxad gelisaa, qosolkaaguna wuxuu ii yahay dawo, ogaanshaha inaad tayda tahayna waxay iga dhigtaa ninka adduunka ugu nasiibka badan.
+        </p>
+        <p>
+          Waxaan jeclahay qalbigaaga nadiifta ah, dhoolla-caddayntaada quruxda badan, dabeecaddaada wanaagsan, iyo wax kasta oo kaa dhigaya <strong>Salma Feysal Ahmed Hassan</strong>. Bishan koowaad waa bilowga sheekadeenna quruxda badan, waxaana kuu ballan qaadayaa inaan ku xannaaneeyo, ku ixtiraamo, kuna jeclaado in ka badan maalin kasta oo soo marta.
+        </p>
+      </div>
+
+      <!-- Signature Block -->
+      <div class="mt-8 pt-6 border-t border-pink-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Waxaa si kal iyo laab ah kuu jecel,</p>
+          <p class="font-serif text-xl sm:text-2xl font-bold text-rose-700 mt-0.5">Saleh Sadiq Mohamud</p>
+        </div>
+        <div class="inline-flex items-center gap-2 self-start sm:self-auto px-4 py-2 rounded-2xl bg-pink-50 border border-pink-200 text-rose-700 text-sm font-medium">
+          <span>Waan ku jeclahay xabiibti</span>
+          <span>❤️</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         INTERACTIVE "REASONS I LOVE YOU" FLIP CARDS (SOMALI)
+         ========================================================= -->
+    <section class="space-y-5">
+      <div class="text-center space-y-1.5">
+        <span class="text-xs font-semibold uppercase tracking-widest text-rose-500">Taabo Kaar Kasta Si Aad U Akhrido</span>
+        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-rose-950">6 Sababood Oo Aan Kuu Jeclahay</h3>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5" id="reasons-grid">
+        <!-- Cards injected cleanly by JavaScript -->
+      </div>
+    </section>
+
+    <!-- =========================================================
+         INTERACTIVE HEART & LOVE METER WIDGET (SOMALI)
+         ========================================================= -->
+    <section class="glass-card rounded-3xl p-7 sm:p-10 text-center space-y-6">
+      <div class="space-y-2">
+        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-rose-950">Garaaca Wadnaha & Jacaylkaaga</h3>
+        <p class="text-slate-600 text-sm sm:text-base max-w-md mx-auto">
+          Taabo badhamada hoose mar kasta oo aad i xiisto ama aad rabto inaad aragto fariin jacayl oo degdeg ah.
+        </p>
+      </div>
+
+      <!-- Interactive Counter Badge -->
+      <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-rose-50 border border-pink-200 text-rose-700 font-semibold text-sm shadow-sm">
+        <span>Heerka Jacaylkaaga:</span>
+        <span id="love-counter" class="text-lg font-bold text-rose-600">100</span>
+        <span>💖</span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2">
+        <button onclick="triggerLoveBurst('kiss')" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-semibold shadow-md shadow-pink-200 active:scale-95 transition-all flex items-center gap-2 cursor-pointer">
+          <span class="text-xl">💓</span>
+          <span>Garaac Wadnaha</span>
+        </button>
+
+        <button onclick="triggerLoveBurst('hug')" class="px-6 py-3.5 rounded-2xl bg-white hover:bg-pink-50 text-rose-700 border-2 border-pink-200 font-semibold shadow-sm active:scale-95 transition-all flex items-center gap-2 cursor-pointer">
+          <span class="text-xl">🌹</span>
+          <span>Jacaylkaaga Dir</span>
+        </button>
+      </div>
+
+      <!-- Dynamic Sweet Toast Response -->
+      <div id="love-message-box" class="min-h-[3.25rem] flex items-center justify-center">
+        <p id="love-message-text" class="text-rose-600 font-medium italic text-sm sm:text-base transition-opacity duration-300">
+          "Qalbigaygu wuxuu ku garaacayaa magacaaga, Salma."
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center pb-8 pt-2 space-y-2">
+      <p class="font-serif italic text-rose-800 text-base">
+        Waxaa si kal iyo laab ah kuu jecel, Saleh Sadiq Mohamud — Una hibeyey Salma Feysal Ahmed Hassan
+      </p>
+      <p class="text-xs text-slate-400">
+        1 Bil oo Farxad Ah • Sannado Badan oo Soo Socda 💕
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- =========================================================
+       JAVASCRIPT INTERACTIVITY & ANIMATIONS (SOMALI)
+       ========================================================= -->
+  <script>
+    // 1. Reasons I Love You Data (Somali)
+    const reasons = [
+      {
+        number: "01",
+        frontTitle: "Dhoolla-caddayntaada Quruxda Badan",
+        icon: "✨",
+        backText: "Daqiiqadda aad dhoolla-caddayso, wax kasta oo kale way libdhaan. Runtii waa muuqaalka aan ugu jeclahay adduunka oo dhan."
+      },
+      {
+        number: "02",
+        frontTitle: "Qalbigaaga Naxariista Badan",
+        icon: "🌷",
+        backText: "Dabeecaddaada deggan, naxariistaada, iyo diirrinaantaadu waxay igu sababaan inaan maalin kasta sii jeclaado naftaada."
+      },
+      {
+        number: "03",
+        frontTitle: "Xasilloonida Aad I Siiso",
+        icon: "🕊️",
+        backText: "La hadalkaagu wuxuu ii yahay raaxo. Si kasta oo ay noloshu u mashquul badan tahay, adigu waxaad dejisaa naftayda."
+      },
+      {
+        number: "04",
+        frontTitle: "Qosolkeenna Aan La Illoobi Karin",
+        icon: "💫",
+        backText: "Kaftan kasta iyo sheeko kasta oo aan wadaagnay waxay bishan ka dhigeen tii ugu fiicnayd nolosheyda."
+      },
+      {
+        number: "05",
+        frontTitle: "Quruxdaada & Haybaddaada",
+        icon: "👑",
+        backText: "Gudaha iyo dibaddaba waad ka qurux badan tahay. Waxaan dareemayaa inaan ahay qofka ugu nasiibka badan maadaama aan ku helay."
+      },
+      {
+        number: "06",
+        frontTitle: "Mustaqbalkeena Quruxda Badan",
+        icon: "💍",
+        backText: "Hal bil waa cutubka koowaad oo keliya. Ma sugi karo sannadaha, riyooyinka, iyo xusuusaha quruxda badan ee inoo yaalla."
+      }
+    ];
+
+    // Render Flip Cards
+    const reasonsGrid = document.getElementById('reasons-grid');
+    reasons.forEach((item) => {
+      const cardWrapper = document.createElement('div');
+      cardWrapper.className = "perspective-1000 h-44 sm:h-48 cursor-pointer select-none";
+      cardWrapper.onclick = function () {
+        const inner = this.querySelector('.card-inner');
+        inner.classList.toggle('rotate-y-180');
+        fireMiniHearts();
+      };
+
+      cardWrapper.innerHTML = `
+        <div class="card-inner relative w-full h-full transform-style-3d">
+          <!-- Front of Card -->
+          <div class="backface-hidden absolute inset-0 glass-card rounded-3xl p-6 flex flex-col items-center justify-center text-center border border-pink-200/80 hover:border-rose-300 transition-colors">
+            <span class="text-xs font-bold text-rose-400 tracking-widest mb-1">SABABTA #${item.number}</span>
+            <div class="text-3xl my-2">${item.icon}</div>
+            <h4 class="font-serif text-lg sm:text-xl font-bold text-rose-950">${item.frontTitle}</h4>
+            <span class="text-[11px] text-rose-500 mt-2 font-medium">Taabo si aad u akhrido ❤️</span>
+          </div>
+
+          <!-- Back of Card -->
+          <div class="backface-hidden rotate-y-180 absolute inset-0 rounded-3xl p-6 bg-gradient-to-br from-rose-500 to-pink-500 text-white flex flex-col items-center justify-center text-center shadow-lg">
+            <p class="text-sm sm:text-base leading-relaxed font-medium">
+              "${item.backText}"
+            </p>
+            <span class="text-xs text-pink-100 mt-3 opacity-90">— Saleh</span>
+          </div>
+        </div>
+      `;
+      reasonsGrid.appendChild(cardWrapper);
+    });
+
+    // 2. Open Envelope Transition
+    function openEnvelope() {
+      const wrapper = document.getElementById('envelope-wrapper');
+      const intro = document.getElementById('intro-screen');
+      const main = document.getElementById('main-content');
+
+      wrapper.classList.add('envelope-open');
+      fireCelebrationConfetti();
+
+      setTimeout(() => {
+        intro.style.opacity = '0';
+        intro.style.pointerEvents = 'none';
+        main.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        setTimeout(() => {
+          intro.style.display = 'none';
+        }, 700);
+      }, 650);
+    }
+
+    // 3. Interactive Heart & Love Counter + Messages (Somali)
+    let loveCount = 100;
+    const kissMessages = [
+      "Wadnahaygu wuxuu ku garaacayaa jacaylkaaga, Salma! 💓",
+      "Waan ku jeclahay in ka badan inta aad qiyaasi karto, xabiibti! ❤️",
+      "Adiga ayaa ah sababta farxaddayda maalin kasta. ✨",
+      "Garaac kasta oo wadnahayga ah wuxuu ku dhawaaqayaa magacaaga! 💕"
+    ];
+    const hugMessages = [
+      "Waxaan kuu soo dirayaa salaam diirran iyo jacayl aan dhammaad lahayn! 🌹",
+      "Qalbigayga ayaad ku dhex jirtaa maanta iyo weligaa. 💖",
+      "Hambalyo bisha koowaad, boqoradda qalbigayga! 🌸",
+      "Allaah ha inoo barakeeyo jacaylkeenna, gacaliso Salma! 🤲❤️"
+    ];
+
+    function triggerLoveBurst(type) {
+      loveCount += 1;
+      document.getElementById('love-counter').textContent = loveCount;
+
+      const msgEl = document.getElementById('love-message-text');
+      const pool = type === 'kiss' ? kissMessages : hugMessages;
+      const randomMsg = pool[Math.floor(Math.random() * pool.length)];
+
+      msgEl.style.opacity = '0';
+      setTimeout(() => {
+        msgEl.textContent = `"${randomMsg}"`;
+        msgEl.style.opacity = '1';
+      }, 150);
+
+      fireCelebrationConfetti();
+    }
+
+    // 4. Confetti Helpers
+    function fireCelebrationConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 45,
+          spread: 70,
+          origin: { y: 0.65 },
+          colors: ['#e11d48', '#fb7185', '#f472b6', '#fda4af', '#ffffff']
+        });
+      }
+    }
+
+    function fireMiniHearts() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 15,
+          spread: 45,
+          origin: { y: 0.7 },
+          colors: ['#f43f5e', '#f9a8d4']
+        });
+      }
+    }
+
+    // 5. Continuous Gentle Floating Background Hearts
+    const heartsContainer = document.getElementById('hearts-container');
+    const heartSymbols = ['❤️', '💖', '🌸', '💕', '💗'];
+
+    function spawnFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+
+      const size = Math.random() * 16 + 14; // 14px to 30px
+      const leftPos = Math.random() * 100; // 0vw to 100vw
+      const duration = Math.random() * 6 + 7; // 7s to 13s
+
+      heart.style.fontSize = `${size}px`;
+      heart.style.left = `${leftPos}vw`;
+      heart.style.animationDuration = `${duration}s`;
+
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    }
+
+    // Spawn hearts periodically
+    setInterval(spawnFloatingHeart, 900);
+    // Initial batch
+    for (let i = 0; i < 6; i++) {
+      setTimeout(spawnFloatingHeart, i * 300);
+    }
+  </script>
+</body>
+</html>
